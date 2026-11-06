@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veda Security — Advanced Cyber Learning Platform</title>
+  <title>Veda Security — Cyber Defense & Learning Academy</title>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,8 +19,10 @@
       --text-sub: #94a3b8;
       --border: rgba(139, 92, 246, 0.25);
       --danger: #ef4444;
+      --success: #10b981;
       --telegram: #229ED9;
       --discord: #5865F2;
+      --razorpay: #072654;
     }
 
     * {
@@ -37,7 +39,6 @@
       overflow-x: hidden;
     }
 
-    /* GLASSMORPHISM UTILITY */
     .glass {
       background: var(--bg-card);
       backdrop-filter: blur(16px);
@@ -68,7 +69,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      letter-spacing: 0.5px;
     }
 
     .brand i { color: var(--accent); }
@@ -102,13 +102,12 @@
     .nav-links a:hover {
       background: rgba(139, 92, 246, 0.2);
       color: #fff;
-      box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
     }
 
-    /* HERO COVER SECTION WITH CANVAS ANIMATION */
+    /* HERO COVER */
     .hero-section {
       position: relative;
-      min-height: 75vh;
+      min-height: 70vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -145,7 +144,6 @@
       font-size: 0.85rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
-      animation: pulse 2s infinite;
     }
 
     .hero-title {
@@ -193,25 +191,15 @@
       box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     }
 
-    .btn-telegram {
-      background: var(--telegram);
-      box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3);
+    .btn-pay {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
     }
 
-    .btn-telegram:hover {
-      box-shadow: 0 6px 20px rgba(34, 158, 217, 0.5);
-    }
+    .btn-telegram { background: var(--telegram); }
+    .btn-discord { background: var(--discord); }
 
-    .btn-discord {
-      background: var(--discord);
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
-    }
-
-    .btn-discord:hover {
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-    }
-
-    /* MAIN CONTAINER */
+    /* LAYOUT CONTAINERS */
     .container {
       max-width: 1200px;
       margin: 2rem auto;
@@ -233,7 +221,6 @@
       color: #fff;
     }
 
-    /* SEARCH BOX */
     .search-box {
       width: 100%;
       padding: 0.9rem 1.2rem;
@@ -244,50 +231,41 @@
       margin-bottom: 2rem;
       outline: none;
       font-size: 1rem;
-      transition: 0.3s;
     }
 
-    .search-box:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
-    }
-
-    /* LIVE CLASS OFFLINE CONTAINER */
-    .live-offline-card {
+    /* PAYWALL & LIVE CLASS */
+    .paywall-card {
       padding: 3rem 2rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(239, 68, 68, 0.05) 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.2rem;
-      border: 1px dashed rgba(139, 92, 246, 0.4);
     }
 
-    .live-offline-icon {
+    .lock-icon {
       font-size: 3.5rem;
-      color: var(--accent);
+      color: var(--danger);
       animation: float 3s ease-in-out infinite;
     }
 
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .status-offline {
-      background: rgba(239, 68, 68, 0.15);
-      color: var(--danger);
-      border: 1px solid var(--danger);
+    #videoPlayer {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
     }
 
-    /* YOUTUBE VIDEO GRID & CARDS */
+    /* TUTORIAL YOUTUBE GRID */
     .grid-layout {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -298,8 +276,8 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .video-card:hover {
@@ -316,38 +294,23 @@
 
     .thumbnail-wrapper img {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
     }
 
-    .video-card:hover .thumbnail-wrapper img {
-      transform: scale(1.05);
-    }
+    .video-card:hover .thumbnail-wrapper img { transform: scale(1.05); }
 
     .play-btn-overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
+      width: 50px; height: 50px;
       background: rgba(239, 68, 68, 0.9);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.2rem;
       box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
-    }
-
-    .video-card:hover .play-btn-overlay {
-      transform: translate(-50%, -50%) scale(1.15);
     }
 
     .video-info {
@@ -363,16 +326,12 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 0.5rem;
-      line-height: 1.4;
     }
 
-    /* MODAL FOR IN-PAGE VIDEO PLAYER */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.9);
       display: none;
       justify-content: center;
@@ -389,13 +348,9 @@
 
     .modal-close {
       position: absolute;
-      top: -40px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
+      top: -40px; right: 0;
+      background: none; border: none;
+      color: #fff; font-size: 2rem; cursor: pointer;
     }
 
     .responsive-iframe {
@@ -408,22 +363,16 @@
 
     .responsive-iframe iframe {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       border: none;
     }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 0;
       margin-top: 4rem;
       text-align: center;
       color: var(--text-sub);
-      font-size: 0.95rem;
-      background: rgba(7, 9, 19, 0.95);
     }
 
     .footer-links {
@@ -431,11 +380,6 @@
       justify-content: center;
       gap: 1.5rem;
       margin-top: 1rem;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
     }
 
     @keyframes float {
@@ -451,8 +395,7 @@
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 100%;
-        left: 0;
+        top: 100%; left: 0;
         background: rgba(7, 9, 19, 0.98);
         padding: 1.5rem;
         border-bottom: 1px solid var(--border);
@@ -470,27 +413,27 @@
     <button class="nav-toggle" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" onclick="closeNav()">Home</a></li>
-      <li><a href="#live" onclick="closeNav()">🔴 Live Class</a></li>
-      <li><a href="#videos" onclick="closeNav()">🎬 Tutorials</a></li>
-      <li><a href="#community" onclick="closeNav()">👥 Community</a></li>
+      <li><a href="#live" onclick="closeNav()">🔴 Live Stream</a></li>
+      <li><a href="#videos" onclick="closeNav()">🎬 Free Tutorials</a></li>
+      <li><a href="#help" onclick="closeNav()">💬 Help Centre</a></li>
     </ul>
   </nav>
 
-  <!-- COVER PAGE / HERO SECTION -->
+  <!-- HERO COVER SECTION -->
   <section class="hero-section" id="home">
     <canvas id="heroCanvas"></canvas>
     <div class="hero-content">
       <div class="hero-badge">
-        <i class="fa-solid fa-bolt"></i> Cyber Security & Python Mastery
+        <i class="fa-solid fa-lock"></i> Premium Cyber Security Platform
       </div>
-      <h1 class="hero-title">Veda Security Learning Hub</h1>
-      <p class="hero-subtitle">Master Ethical Hacking, Cyber Defense, and Advanced Scripting with top-tier video tutorials and live community interaction.</p>
+      <h1 class="hero-title">Veda Security Academy</h1>
+      <p class="hero-subtitle">Access free tutorials or enroll in our premium cybersecurity course to unlock exclusive live streams and direct instructor guidance.</p>
       <div class="hero-btns">
+        <a href="https://rzp.io/rzp/MxBpOewq" target="_blank" class="btn-action btn-pay">
+          <i class="fa-solid fa-credit-card"></i> Buy Course to Unlock Live
+        </a>
         <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" class="btn-action btn-telegram">
           <i class="fa-brands fa-telegram"></i> Telegram Notifications
-        </a>
-        <a href="https://discord.com/invite/f4dk8EFcS" target="_blank" class="btn-action btn-discord">
-          <i class="fa-brands fa-discord"></i> Discord Community
         </a>
       </div>
     </div>
@@ -498,54 +441,79 @@
 
   <div class="container">
 
-    <!-- SEARCH BOX -->
-    <input type="text" id="videoSearch" class="search-box" placeholder="🔍 Search Tutorials by keyword..." oninput="filterVideos()">
+    <!-- SEARCH BOX FOR YOUTUBE VIDEOS -->
+    <input type="text" id="videoSearch" class="search-box" placeholder="🔍 Search Free YouTube Tutorials..." oninput="filterVideos()">
 
-    <!-- LIVE CLASS SECTION -->
+    <!-- LIVE CLASS SECTION (PAYWALL ENFORCED) -->
     <section class="section-block" id="live">
       <div class="section-title">
-        <i class="fa-solid fa-tower-broadcast" style="color: var(--danger);"></i> 🔴 LIVE CLASS
+        <i class="fa-solid fa-tower-broadcast" style="color: var(--danger);"></i> 🔴 Premium Live Class
       </div>
-      <div class="glass live-offline-card">
-        <div class="status-badge status-offline">
-          <i class="fa-solid fa-circle"></i> STREAM OFFLINE
+
+      <!-- LOCKED PAYWALL STATE -->
+      <div class="glass paywall-card" id="paywallContainer">
+        <div class="lock-icon">
+          <i class="fa-solid fa-lock"></i>
         </div>
-        <div class="live-offline-icon">
-          <i class="fa-solid fa-video-slash"></i>
-        </div>
-        <h2 style="color: #fff;">LIVE SOON</h2>
-        <p style="color: var(--text-sub); max-width: 500px;">
-          The stream is currently offline. Class schedule updates and live notifications will be posted directly on our Telegram channel.
+        <h2 style="color: #fff;">Course Enrollment Required</h2>
+        <p style="color: var(--text-sub); max-width: 580px;">
+          To access the live interactive sessions, you must purchase the premium course. Stream notifications and schedules are regularly announced in our Telegram channel.
         </p>
-        <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" class="btn-action btn-telegram">
-          <i class="fa-brands fa-telegram"></i> Get Notified on Telegram
-        </a>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem;">
+          <a href="https://rzp.io/rzp/MxBpOewq" target="_blank" class="btn-action btn-pay">
+            <i class="fa-solid fa-bag-shopping"></i> Buy Course to Unlock Live Class
+          </a>
+          <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" class="btn-action btn-telegram">
+            <i class="fa-brands fa-telegram"></i> Telegram Notifications
+          </a>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-sub);">
+          <span>Already paid or need payment verification?</span>
+          <br>
+          <a href="https://discord.com/invite/JRq99sN56" target="_blank" style="color: var(--discord); font-weight: 600;">
+            <i class="fa-brands fa-discord"></i> Verify Payment on Discord Help Centre
+          </a>
+        </div>
+        <button onclick="unlockLivePlayer()" style="margin-top:0.5rem; background:none; border:none; color:var(--accent); cursor:pointer; text-decoration:underline; font-size:0.8rem;">
+          (Simulate Payment Access)
+        </button>
+      </div>
+
+      <!-- UNLOCKED LIVE PLAYER (HIDDEN BY DEFAULT) -->
+      <div class="glass" id="unlockedPlayerContainer" style="display: none; padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Course Unlocked</span>
+          <span style="color: var(--danger); font-size: 0.9rem; font-weight: 600;"><i class="fa-solid fa-circle"></i> Live Streaming Active</span>
+        </div>
+        <div class="video-wrapper">
+          <video id="videoPlayer" controls></video>
+        </div>
       </div>
     </section>
 
-    <!-- YOUTUBE VIDEO TUTORIALS SECTION -->
+    <!-- FREE YOUTUBE TUTORIALS SECTION -->
     <section class="section-block" id="videos">
       <div class="section-title">
-        <i class="fa-brands fa-youtube" style="color: #ef4444;"></i> 🎬 Featured Security Tutorials
+        <i class="fa-brands fa-youtube" style="color: #ef4444;"></i> 🎬 Free Security Tutorials
       </div>
       <div class="grid-layout" id="videoGrid"></div>
     </section>
 
-    <!-- COMMUNITY SECTION -->
-    <section class="section-block" id="community">
+    <!-- HELP CENTRE & COMMUNITY SECTION -->
+    <section class="section-block" id="help">
       <div class="glass" style="padding: 3rem 2rem; text-align: center;">
         <div class="section-title" style="justify-content: center;">
-          <i class="fa-solid fa-users" style="color: var(--accent);"></i> Join Veda Security Network
+          <i class="fa-solid fa-headset" style="color: var(--accent);"></i> Help Centre & Verification
         </div>
         <p style="margin-bottom: 2rem; color: var(--text-sub); max-width: 600px; margin-left: auto; margin-right: auto;">
-          Connect with security researchers, ask questions, and receive announcements on Telegram & Discord.
+          Have you completed your payment or need assistance with access? Join our dedicated Discord Help Centre for quick payment status verification and technical support.
         </p>
         <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-          <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" class="btn-action btn-telegram">
-            <i class="fa-brands fa-telegram"></i> Telegram Channel
+          <a href="https://discord.com/invite/JRq99sN56" target="_blank" class="btn-action btn-discord">
+            <i class="fa-brands fa-discord"></i> Discord Help Centre & Payment Check
           </a>
-          <a href="https://discord.com/invite/f4dk8EFcS" target="_blank" class="btn-action btn-discord">
-            <i class="fa-brands fa-discord"></i> Discord Community
+          <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" class="btn-action btn-telegram">
+            <i class="fa-brands fa-telegram"></i> Telegram Stream Alerts
           </a>
         </div>
       </div>
@@ -564,16 +532,18 @@
   </div>
 
   <footer>
-    <p><strong>Veda Security</strong> — Advanced Cyber Security Training Platform</p>
+    <p><strong>Veda Security</strong> — Cyber Security Training & Live Learning</p>
     <p>&copy; 2026 All Rights Reserved.</p>
     <div class="footer-links">
-      <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" style="color: var(--telegram);">Telegram Updates</a>
-      <a href="https://discord.com/invite/f4dk8EFcS" target="_blank" style="color: var(--discord);">Discord Server</a>
+      <a href="https://rzp.io/rzp/MxBpOewq" target="_blank" style="color: var(--accent);">Enroll / Buy Course</a>
+      <a href="https://discord.com/invite/JRq99sN56" target="_blank" style="color: var(--discord);">Discord Help Centre</a>
+      <a href="https://t.me/+VIG47x9kaJYyODE9" target="_blank" style="color: var(--telegram);">Telegram Channel</a>
     </div>
   </footer>
 
   <script>
-    // VIDEO LIST DATA
+    const LIVEPEER_HLS_URL = "https://livepeercdn.studio/hls/b91557omqedsswdu/index.m3u8";
+
     const videoList = [
       { id: "2nx_tD--cG0", title: "Ethical Hacking & Penetration Testing Guide" },
       { id: "xd4JBDKZUe8", title: "Cyber Security Fundamentals & Toolsets" },
@@ -594,13 +564,12 @@
       document.getElementById('navLinks').classList.remove('active');
     }
 
-    /* RENDER VIDEO CARDS */
     function renderVideos(items) {
       const grid = document.getElementById('videoGrid');
       grid.innerHTML = '';
 
       if (items.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 2rem;">No tutorials match your search.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 2rem;">No tutorials found.</div>`;
         return;
       }
 
@@ -618,21 +587,19 @@
           </div>
           <div class="video-info">
             <div class="video-title">${v.title}</div>
-            <span style="font-size: 0.8rem; color: var(--accent);"><i class="fa-solid fa-circle-play"></i> Watch On-Site</span>
+            <span style="font-size: 0.8rem; color: var(--accent);"><i class="fa-solid fa-circle-play"></i> Watch Free Video</span>
           </div>
         `;
         grid.appendChild(card);
       });
     }
 
-    /* FILTER VIDEOS */
     function filterVideos() {
       const query = document.getElementById('videoSearch').value.toLowerCase();
       const filtered = videoList.filter(v => v.title.toLowerCase().includes(query));
       renderVideos(filtered);
     }
 
-    /* IN-PAGE VIDEO PLAYER MODAL */
     function openVideoModal(videoId) {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('youtubeIframe');
@@ -647,7 +614,23 @@
       modal.style.display = 'none';
     }
 
-    /* HERO BACKGROUND CANVAS ANIMATION */
+    function unlockLivePlayer() {
+      document.getElementById('paywallContainer').style.display = 'none';
+      document.getElementById('unlockedPlayerContainer').style.display = 'block';
+      initLivePlayer();
+    }
+
+    function initLivePlayer() {
+      const video = document.getElementById('videoPlayer');
+      if (Hls.isSupported()) {
+        const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+        hls.loadSource(LIVEPEER_HLS_URL);
+        hls.attachMedia(video);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = LIVEPEER_HLS_URL;
+      }
+    }
+
     function initCanvasAnimation() {
       const canvas = document.getElementById('heroCanvas');
       const ctx = canvas.getContext('2d');
